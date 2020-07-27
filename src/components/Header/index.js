@@ -2,7 +2,7 @@
 
 import React from 'react';
 import { View, Text, StyleSheet } from 'react-native';
-
+import * as Animatable from 'react-native-animatable';
 
 
 
@@ -10,9 +10,9 @@ import { View, Text, StyleSheet } from 'react-native';
 
 function HeaderComponent (){
     return(
-        <View>
+        <Animatable.View animation="bounceInDown" useNativeDriver duration={1500}>
             <Text style={styles.title}>My To Do List App</Text>
-        </View>
+        </Animatable.View>
 )}
 
 
@@ -29,6 +29,7 @@ const styles = StyleSheet.create({
         marginTop: 50,
         fontWeight: 'bold',
         fontSize: 20,
-        textAlign: 'center'
+        textAlign: 'center',
+        marginBottom: 15,
     }
 })
