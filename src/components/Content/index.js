@@ -10,12 +10,12 @@ import * as Animatable from 'react-native-animatable';
 
 
 
-function ContentComponentView ({ data }){
+function ContentComponentView ({ itens, handleRemoveTask }){
     return(
         <Animatable.View style={styles.list} animation="bounce" duration={1500} useNativeDriver>
             <View style={styles.container}>
-                    <Text>{data}</Text>
-                    <Icon  name="check" size={20} color="green" onPress={() => alert('Check Pressioned')}/>
+                    <Text>{itens}</Text>
+                    <Icon  name="check" size={24} color="green" onPress={() => handleRemoveTask(itens)}/>
             </View>
         </Animatable.View>
 )}

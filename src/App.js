@@ -1,7 +1,7 @@
 //by Roberto Aleydon
 
-import React, { useState } from 'react';
-import { StyleSheet, View, StatusBar, FlatList,  TouchableOpacity, Text, TextInput } from 'react-native';
+import React, { useState, useEffect } from 'react';
+import { StyleSheet, View, StatusBar, FlatList,  TouchableOpacity, Text, TextInput, AsyncStorage } from 'react-native';
 import HeaderComponent from './components/Header';
 import ContentComponentView from './components/Content';
 import Icon from 'react-native-vector-icons/FontAwesome';
@@ -13,11 +13,42 @@ import Modal from 'react-native-modal';
 
 
 
+
 function App (){    
-    const [ task, setTask ] = useState(['Andar de meiota', 'Aprender React', 'React Native eh Top', 'Programacao eh Vida', 'Roberto Aleydon',
-     'Ta ficando Chave, pae', 'Lista de A Fazeres', 'Ta ficando Bonitin', 'Huehueue', 'Voa Mlk', 'Pai ta online']);
-    
+    const [ task, setTask ] = useState([]);
     const [ visible, setVisible ] = useState(false);
+    const [ input, setInput ] = useState('');
+
+
+
+    function handleCancel(){
+        const clearInput = '';
+        setInput(clearInput);
+        setVisible(false);
+    }
+
+
+
+    function handleRemoveTask(index){
+        const currentData = task;
+        currentData.splice(index, 1);
+        setTask([...currentData]);
+    }
+
+
+
+    function handleAdd(){
+        if(input !== ''){
+            const newTask = input;
+            setTask([...task, newTask]);
+            setInput('');
+            setVisible(false);
+        }else{
+            console.log(('Please, type something Here'));
+        }
+    }
+
+
 
     return(
         <LinearGradient style={styles.container} colors={['#FFBF00', '#FF9400']} > 
@@ -29,19 +60,30 @@ function App (){
             </View>
 
 
+
             <View>
                 <Modal isVisible={visible} animationIn="slideInUp"
+                    animationInTiming={90}
+                    useNativeDriver={true}
                     onBackButtonPress={() => setVisible(false)} >
+
                     <View style={styles.modal}>
-                        <TextInput placeholder="Type Here Your Task..." style={styles.textInputModal}/>
+                        <TextInput placeholder="Type Here Your Task..." 
+                            style={styles.textInputModal}
+                            multiline={true}
+                            value={input}
+                            onChangeText={(text) => setInput(text)}
+                        />
+
                         <View style={styles.btnModal}>
-                            <TouchableOpacity>
+                            <TouchableOpacity onPress={handleAdd}>
                                 <Text style={styles.btnModalStyle}>Add</Text>
                             </TouchableOpacity>
-                            <TouchableOpacity onPress={() => setVisible(false)}>
+                            <TouchableOpacity onPress={handleCancel}>
                                 <Text style={styles.btnModalStyle}>Cancel</Text>
                             </TouchableOpacity>
                         </View>
+                    
                     </View>
                 </Modal>
             </View>    
@@ -49,11 +91,11 @@ function App (){
 
             <FlatList 
                 showsVerticalScrollIndicator={false}
+                autoCorrect={false}
+                autoFocus={true}
                 data={task}
-                keyExtractor={(item) => item}
-                renderItem={ ({ item }) => {
-                    return <ContentComponentView data={item} />
-                }}
+                keyExtractor={(item) => String(item.key)}
+                renderItem={ ({ item }) =>  <ContentComponentView itens={item} handleRemoveTask={handleRemoveTask} />}
             />
         
             <FAB onClickAction={() => setVisible(true)} buttonColor="#e2e2e2" iconTextColor="black"  visible={true} iconTextComponent={<Icon name="plus" size={20} />} />
@@ -64,6 +106,7 @@ function App (){
 
 
 export default App;
+
 
 
 
