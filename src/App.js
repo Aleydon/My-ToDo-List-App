@@ -1,6 +1,6 @@
 //by Roberto Aleydon
 
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { StyleSheet, View, StatusBar, FlatList,  TouchableOpacity, Text, TextInput, AsyncStorage } from 'react-native';
 import HeaderComponent from './components/Header';
 import ContentComponentView from './components/Content';
@@ -21,6 +21,8 @@ function App (){
 
 
 
+
+    //Handle cancel modal button
     function handleCancel(){
         const clearInput = '';
         setInput(clearInput);
@@ -29,16 +31,20 @@ function App (){
 
 
 
-    function handleRemoveTask(index){
-        const currentData = task;
-        currentData.splice(index, 1);
-        setTask([...currentData]);
-    }
+
+    //Remove Task filtered
+    const handleRemoveTask = useCallback((data) => {
+       setTask((removeTask) => {
+           return removeTask.filter((tasksRemove) => tasksRemove !== data);
+       });
+    });
 
 
 
+
+    //Add taks and clear input
     function handleAdd(){
-        if(input !== ''){
+        if(input != ''){
             const newTask = input;
             setTask([...task, newTask]);
             setInput('');
@@ -94,8 +100,8 @@ function App (){
                 autoCorrect={false}
                 autoFocus={true}
                 data={task}
-                keyExtractor={(item) => String(item.key)}
-                renderItem={ ({ item }) =>  <ContentComponentView itens={item} handleRemoveTask={handleRemoveTask} />}
+                keyExtractor={(item, index) => index.toString()}
+                renderItem={ ({ item, index }) =>  <ContentComponentView data={item} handleRemoveTask={handleRemoveTask} />}
             />
         
             <FAB onClickAction={() => setVisible(true)} buttonColor="#e2e2e2" iconTextColor="black"  visible={true} iconTextComponent={<Icon name="plus" size={20} />} />

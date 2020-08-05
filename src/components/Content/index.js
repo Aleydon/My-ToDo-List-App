@@ -1,7 +1,7 @@
 //by Roberto Aleydon
 
 import React from 'react';
-import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
+import { View, Text, StyleSheet } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import * as Animatable from 'react-native-animatable';
 
@@ -10,12 +10,12 @@ import * as Animatable from 'react-native-animatable';
 
 
 
-function ContentComponentView ({ itens, handleRemoveTask }){
+function ContentComponentView ({ data, handleRemoveTask }){
     return(
         <Animatable.View style={styles.list} animation="bounce" duration={1500} useNativeDriver>
             <View style={styles.container}>
-                    <Text>{itens}</Text>
-                    <Icon  name="check" size={24} color="green" onPress={() => handleRemoveTask(itens)}/>
+                    <Text>{data}</Text>
+                    <Icon  name="check" size={24} color="green" onPress={() => handleRemoveTask(data)}/>
             </View>
         </Animatable.View>
 )}
