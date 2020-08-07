@@ -11,7 +11,7 @@ import Modal from 'react-native-modal';
 import Toast from 'react-native-tiny-toast';
 import AsyncStorage from '@react-native-community/async-storage';
 import { toastCompleted } from './components/Toasts';
-
+import appStyle from './components/styles';
 
 
 
@@ -81,14 +81,14 @@ function App (){
 
 
     //Add taks and clear input
-    function handleAdd(){
+    const  handleAdd = useCallback(() => {
         if(input != ''){
             const newTask = input;
             setTask([...task, newTask]);
             setInput('');
             setVisible(false);
         }
-    };
+    });
 
 
 
@@ -101,7 +101,7 @@ function App (){
 
 
     return(
-        <LinearGradient style={styles.container} colors={['#FFBF00', '#FF9400']} > 
+        <LinearGradient style={appStyle.container} colors={['#FFBF00', '#FF9400']} > 
             <StatusBar translucent backgroundColor="transparent" barStyle="light-content"/>
             
 
@@ -118,20 +118,20 @@ function App (){
                     onBackButtonPress={backButtonHiddenModal}>
 
 
-                    <View style={styles.modal}>
+                    <View style={appStyle.modal}>
                         <TextInput placeholder="Type Here Your Task..." 
-                            style={styles.textInputModal}
+                            style={appStyle.textInputModal}
                             multiline={false}
                             value={input}
                             onChangeText={(text) => setInput(text)}
                         />
 
-                        <View style={styles.btnModal}>
+                        <View style={appStyle.btnModal}>
                             <TouchableOpacity onPress={handleAdd}>
-                                <Text style={styles.btnModalStyle}>Add</Text>
+                                <Text style={appStyle.btnModalStyle}>Add</Text>
                             </TouchableOpacity>
                             <TouchableOpacity onPress={handleCancel}>
-                                <Text style={styles.btnModalStyle}>Cancel</Text>
+                                <Text style={appStyle.btnModalStyle}>Cancel</Text>
                             </TouchableOpacity>
                         </View>
                     
@@ -156,55 +156,10 @@ function App (){
 )}
 
 
+
 export default App;
 
 
 
 
 
-const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-    },
-
-    modal: {
-        backgroundColor: 'white',
-        borderRadius: 20,
-        width: "100%",
-        height: 150,
-        justifyContent: 'center',
-        alignItems: 'center',
-        marginBottom: 70,
-        paddingBottom: 15,
-        paddingTop: 30,
-    },  
-
-    btnModal: {
-        flex: 1,
-        flexDirection: 'row',
-        margin: 2,
-    },
-
-    btnModalStyle: {
-        backgroundColor: '#FF9400',
-        width: 100,
-        height: 35,
-        borderRadius: 50,
-        margin: 5,
-        color: 'white',
-        fontWeight: 'bold',
-        textAlignVertical: 'center',
-        textAlign: 'center', 
-        borderWidth: 1,
-        borderColor: '#20232a',
-    },
-
-    textInputModal: {
-        width: 250,
-        borderWidth: 1,
-        borderRadius: 50,
-        textAlign: 'center',
-        marginBottom: 10,
-        borderColor: '#e3e3e3'
-    }
-})
