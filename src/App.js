@@ -74,7 +74,7 @@ function App (){
        setTask((removeTask) => {
            return removeTask.filter((tasksRemove) => tasksRemove !== data);
        });
-       Toast.showSuccess(data + ' Completed', toastCompleted);
+       Toast.showSuccess('Task Completed', toastCompleted);
     });
 
 
@@ -121,7 +121,7 @@ function App (){
                     <View style={styles.modal}>
                         <TextInput placeholder="Type Here Your Task..." 
                             style={styles.textInputModal}
-                            multiline={true}
+                            multiline={false}
                             value={input}
                             onChangeText={(text) => setInput(text)}
                         />
@@ -182,6 +182,7 @@ const styles = StyleSheet.create({
     btnModal: {
         flex: 1,
         flexDirection: 'row',
+        margin: 2,
     },
 
     btnModalStyle: {
@@ -199,6 +200,11 @@ const styles = StyleSheet.create({
     },
 
     textInputModal: {
-        width: 200
+        width: 250,
+        borderWidth: 1,
+        borderRadius: 50,
+        textAlign: 'center',
+        marginBottom: 10,
+        borderColor: '#e3e3e3'
     }
 })

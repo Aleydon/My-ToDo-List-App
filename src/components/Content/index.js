@@ -37,6 +37,7 @@ const styles = StyleSheet.create({
         justifyContent: 'space-between',
         borderWidth: 1,
         borderColor: "#20232a",
+        height: 55,
     },
 
     list: {

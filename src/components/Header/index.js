@@ -11,7 +11,7 @@ import * as Animatable from 'react-native-animatable';
 function HeaderComponent (){
     return(
         <Animatable.View animation="bounceInDown" useNativeDriver duration={1500}>
-            <Text style={styles.title}>My To Do List App</Text>
+            <Text style={styles.title}>My To-Do List App</Text>
         </Animatable.View>
 )}
 
