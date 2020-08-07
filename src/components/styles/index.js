@@ -46,5 +46,5 @@ export default appStyle = StyleSheet.create({
         textAlign: 'center',
         marginBottom: 10,
         borderColor: '#e3e3e3'
-    }
+    },
 });

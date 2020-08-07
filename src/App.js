@@ -10,7 +10,7 @@ import LinearGradient from 'react-native-linear-gradient';
 import Modal from 'react-native-modal';
 import Toast from 'react-native-tiny-toast';
 import AsyncStorage from '@react-native-community/async-storage';
-import { toastCompleted } from './components/Toasts';
+import { toastCompleted, toastRemove } from './components/Toasts';
 import appStyle from './components/styles';
 
 
@@ -40,6 +40,27 @@ function App (){
         loadTasks();
     }, []);
 
+
+
+
+    //Remove LocalStorage | Clear Todo List
+    const removeAllTasks = useCallback(() => {
+        async function removeAll(){
+            try{
+                await AsyncStorage.removeItem('@local-tasks');
+                setTask(task.filter((tasksDelete) => (tasksDelete == task) ));
+                Toast.show('All Tasks Deleted', toastRemove);
+
+                if(task.length == 0 || task == null){
+                    Toast.show('No Tasks Found!', toastRemove);
+                }
+                
+            }catch(error){
+                alert(error);
+            }
+        }
+        removeAll();
+    });
 
 
 
@@ -105,8 +126,8 @@ function App (){
             <StatusBar translucent backgroundColor="transparent" barStyle="light-content"/>
             
 
-            <View>  
-                <HeaderComponent />
+            <View style={{marginBottom: 15}}>  
+                <HeaderComponent removeAllTasks={removeAllTasks} />
             </View>
 
 

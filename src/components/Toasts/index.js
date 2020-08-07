@@ -19,3 +19,20 @@ export const toastCompleted =  {
     duration: 700,
     animation: true,
    }
+
+
+
+export const toastRemove  =  {
+    position: Toast.position.center,
+    containerStyle:{
+     backgroundColor: '#f00',
+     borderRadius: 15,
+    },
+    textStyle:{
+     color:'#fff',
+    },
+    mask:false,
+    maskStyle:{},
+    duration: 700,
+    animation: true,
+};
