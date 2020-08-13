@@ -48,7 +48,7 @@ function App (){
         async function removeAll(){
             try{
                 await AsyncStorage.removeItem('@local-tasks');
-                setTask(task.filter((tasksDelete) => (tasksDelete == task) ));
+                setTask(task.filter((tasksDelete) => (tasksDelete === task) ));
                 Toast.show('All Tasks Deleted', toastRemove);
 
                 if(task.length == 0 || task == null){
@@ -167,7 +167,9 @@ function App (){
                 autoFocus={true}
                 data={task}
                 keyExtractor={(item, index) => index.toString()}
-                renderItem={ ({ item, index }) =>  <ContentComponentView data={item} handleRemoveTask={handleRemoveTask} />}
+                renderItem={ ({ item, index }) =>  <ContentComponentView data={item} handleRemoveTask={handleRemoveTask} >
+                    </ContentComponentView>
+                }
             />
         
             <FAB onClickAction={() => setVisible(true)} buttonColor="#e2e2e2" iconTextColor="black"  visible={true} iconTextComponent={<Icon name="plus" size={20} />} style={{borderWidth: 1, borderColor: '#e3e3e3'}} />
