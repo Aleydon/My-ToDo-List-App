@@ -1,16 +1,18 @@
-//by Roberto Aleydon
+/* by Roberto Aleydon */
 
 import React, { useState, useEffect, useCallback } from 'react';
-import { StyleSheet, View, StatusBar, FlatList,  TouchableOpacity, Text, TextInput } from 'react-native';
-import HeaderComponent from './components/Header';
-import ContentComponentView from './components/Content';
+import { View, StatusBar, FlatList,  TouchableOpacity, Text, TextInput } from 'react-native';
+
 import Icon from 'react-native-vector-icons/FontAwesome';
 import FAB from 'react-native-fab';
 import LinearGradient from 'react-native-linear-gradient';
-import Modal from 'react-native-modal';
 import Toast from 'react-native-tiny-toast';
 import AsyncStorage from '@react-native-community/async-storage';
-import { toastCompleted, toastRemove } from './components/Toasts';
+
+import HeaderComponent from './components/header';
+import ContentComponentView from './components/content';
+import Modal from 'react-native-modal';
+import { toastCompleted, toastRemove } from './components/toasts';
 import appStyle from './components/styles';
 
 
@@ -33,8 +35,8 @@ function App (){
                 if(loadStorage){
                     setTask(JSON.parse(loadStorage));
                 }  
-            }catch(error){
-                Toast.show('error');
+            }catch(err){
+                Toast.show(`err`);
             }
         };
         loadTasks();
