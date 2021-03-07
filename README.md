@@ -2,7 +2,9 @@
   <img src="https://github.com/Aleydon/My-ToDo-List-App/blob/master/List-Icon.svg.png" width="150" />
 </p>
 
-# :iphone: My To-Do List App :iphone:
+<p>
+  <h1 align="center">:large_orange_diamond: :iphone: My To-Do List App :iphone: :large_orange_diamond: </h1>
+</p>
 
 ---
 
@@ -20,6 +22,8 @@ React Native: :link: https://reactnative.dev/docs/environment-setup
 
 
 ---
+
+#
 #### :arrow_forward:   Get Started: 
 
   1. Clone the repo
